@@ -8,10 +8,11 @@ namespace ClientTcp
 {
     class Program
     {
-        public static bool NormalFormat(string mes)
+        public static bool NormalFormat(ref string mes)
         {
-            if (mes == string.Empty || mes.Trim() == string.Empty) return false;   
-            foreach (var c in mes)
+            mes = mes.Trim(new Char[] { '*', '.', '+', '-', '/', ')', '(' });
+            if (mes == string.Empty || mes.Trim() == string.Empty) return false;
+            foreach (var c in mes.TrimEnd(new Char[] { '*', '.', '+', '-', '/', ')', '(' }))
             {
                 if (c != ' ')
                     if (!char.IsNumber(c) && !(".+-/*)(").Contains(c)) return false;
@@ -55,7 +56,7 @@ namespace ClientTcp
 
             //Console.ReadLine();
             #endregion
-            
+
             Console.WriteLine("приложение-клиент");
             const string ip = "127.0.0.1";
             const int port = 8082;
@@ -71,7 +72,7 @@ namespace ClientTcp
                 Console.WriteLine("Введите сообщение(может содержать только цифры, точку и +-*/, иначе будет выдана ошибка):");
 
                 message = Console.ReadLine();
-                while (!NormalFormat(message))
+                while (!NormalFormat(ref message))
                 {
                     Console.WriteLine("Введите сообщение еще раз\n");
                     message = Console.ReadLine();
