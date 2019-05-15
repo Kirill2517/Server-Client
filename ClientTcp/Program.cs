@@ -8,9 +8,9 @@ namespace ClientTcp
 {
     class Program
     {
-
         public static bool NormalFormat(string mes)
         {
+            if (mes == string.Empty || mes.Trim() == string.Empty) return false;   
             foreach (var c in mes)
             {
                 if (c != ' ')
