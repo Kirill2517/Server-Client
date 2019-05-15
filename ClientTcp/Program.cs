@@ -10,7 +10,7 @@ namespace ClientTcp
     {
         public static bool NormalFormat(ref string mes)
         {
-            mes = mes.Trim(new Char[] { '*', '.', '+', '-', '/', ')', '(' });
+            mes = mes.Trim(new Char[] { '*', '.', '+', '-', '/', ')', '(', ' ' });
             if (mes == string.Empty || mes.Trim() == string.Empty) return false;
             foreach (var c in mes.TrimEnd(new Char[] { '*', '.', '+', '-', '/', ')', '(' }))
             {
