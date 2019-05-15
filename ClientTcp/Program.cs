@@ -14,7 +14,7 @@ namespace ClientTcp
             foreach (var c in mes)
             {
                 if (c != ' ')
-                    if (!char.IsNumber(c) && c != '.' && c != '+' && c != '-' && c != '/' && c != '*' && c != ')' && c != '(') return false;
+                    if (!char.IsNumber(c) && !(".+-/*)(").Contains(c)) return false;
             }
             return true;
         }
