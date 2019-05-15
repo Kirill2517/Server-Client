@@ -8,18 +8,6 @@ namespace ClientTcp
 {
     class Program
     {
-        public static bool NormalFormat(ref string mes)
-        {
-            mes = mes.Trim(new Char[] { '*', '.', '+', '-', '/', ' ' });
-            if (mes == string.Empty || mes.Trim() == string.Empty) return false;
-            foreach (var c in mes.TrimEnd(new Char[] { '*', '.', '+', '-', '/', ')', '(' }))
-            {
-                if (c != ' ')
-                    if (!char.IsNumber(c) && !(".+-/*)(").Contains(c)) return false;
-            }
-            return true;
-        }
-
         static void Main(string[] args)
         {
             #region TCP
@@ -71,11 +59,19 @@ namespace ClientTcp
                 string message;
                 Console.WriteLine("Введите сообщение(может содержать только цифры, точку и +-*/, иначе будет выдана ошибка):");
 
-                message = Console.ReadLine();
-                while (!NormalFormat(ref message))
+             
+                while (true)
                 {
-                    Console.WriteLine("Введите сообщение еще раз\n");
-                    message = Console.ReadLine();
+                    try
+                    {
+                        message = Console.ReadLine();
+                        Calculator.Calc(message);
+                        break;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Введите сообщение еще раз\n");
+                    }
                 }
 
                 var serverEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8081);

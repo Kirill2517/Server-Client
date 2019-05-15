@@ -66,9 +66,9 @@ namespace Lesson18
                 //решаем полученное сообщение
                 var num = Calculator.Calc(data.ToString());
                 //сервак отправляет ответ клиенту
-                udpSocket.SendTo(Encoding.UTF8.GetBytes($"Сообщение получено, выражение равно {num}"), senderEndPoint);
+                udpSocket.SendTo(Encoding.UTF8.GetBytes($"Сообщение получено, выражение равно: {num}"), senderEndPoint);
 
-                Console.WriteLine($"Полученное выражение {data}");
+                Console.WriteLine($"Полученное выражение: {data}");
             }
         }
     }
